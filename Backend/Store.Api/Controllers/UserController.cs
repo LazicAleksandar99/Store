@@ -80,7 +80,7 @@ namespace Store.Api.Controllers
         {
             if (id <= 0)
                 return BadRequest("Invalid user id");
-            if (!await _userService.VerifyOrDeny(id, status.Role))
+            if (!await _userService.VerifyOrDeny(id, status.Action))
                 return BadRequest("No users found with this id");
             return Ok();
         }
