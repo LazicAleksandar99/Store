@@ -50,12 +50,12 @@ namespace Store.Core.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int>("SellerId")
+                    b.Property<int>("SalesmanId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SellerId");
+                    b.HasIndex("SalesmanId");
 
                     b.ToTable("Articles");
                 });
@@ -70,6 +70,10 @@ namespace Store.Core.Migrations
 
                     b.Property<int>("ArticleId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ArticleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -99,10 +103,6 @@ namespace Store.Core.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ArticleName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -117,7 +117,7 @@ namespace Store.Core.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<int>("SellerId")
+                    b.Property<int>("SalesmanId")
                         .HasColumnType("int");
 
                     b.Property<string>("Status")
@@ -129,7 +129,7 @@ namespace Store.Core.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SellerId");
+                    b.HasIndex("SalesmanId");
 
                     b.HasIndex("UserId");
 
@@ -205,13 +205,13 @@ namespace Store.Core.Migrations
 
             modelBuilder.Entity("Store.Core.Models.Article", b =>
                 {
-                    b.HasOne("Store.Core.Models.User", "Seller")
+                    b.HasOne("Store.Core.Models.User", "Salesman")
                         .WithMany("Articles")
-                        .HasForeignKey("SellerId")
+                        .HasForeignKey("SalesmanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Seller");
+                    b.Navigation("Salesman");
                 });
 
             modelBuilder.Entity("Store.Core.Models.Item", b =>
@@ -235,9 +235,9 @@ namespace Store.Core.Migrations
 
             modelBuilder.Entity("Store.Core.Models.Order", b =>
                 {
-                    b.HasOne("Store.Core.Models.User", "Seller")
+                    b.HasOne("Store.Core.Models.User", "Salesman")
                         .WithMany()
-                        .HasForeignKey("SellerId")
+                        .HasForeignKey("SalesmanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -247,7 +247,7 @@ namespace Store.Core.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Seller");
+                    b.Navigation("Salesman");
 
                     b.Navigation("User");
                 });

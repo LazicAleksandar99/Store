@@ -89,3 +89,9 @@ C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\obj\Debug
 C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\obj\Debug\net6.0\ref\Store.Api.dll
 C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\bin\Debug\net6.0\MailKit.dll
+C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\bin\Debug\net6.0\MimeKit.dll
+C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\acopr\OneDrive\Desktop\New folder\GIT\Store\Backend\Store.Api\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll

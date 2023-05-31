@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Request.ArticleRequest;
 using Store.Core.Common.Interfaces.Services;
@@ -8,7 +7,6 @@ using Store.Core.DTOs.ArticleDTOs;
 
 namespace Store.Api.Controllers
 {
-    [Authorize]
     public class ArticleController : BaseController
     {
         private readonly IArticleService _articleService;
@@ -53,7 +51,7 @@ namespace Store.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("/all")]
+        [HttpGet("all")]
         [Authorize(Roles = "Customer")]
         public async Task<IActionResult> GetAllArticles()
         {
@@ -61,7 +59,7 @@ namespace Store.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("/salesman/{id}")]
+        [HttpGet("salesman/{id}")]
         [Authorize(Roles = "Salesman")]
         public async Task<IActionResult> GetSalesmanArticles(int id)
         {

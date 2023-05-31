@@ -1,11 +1,12 @@
-﻿using Store.Core.DTOs.ItemDTOs;
+﻿using Store.Api.Response.ItemResponse;
+using Store.Core.DTOs.ItemDTOs;
 
 namespace Store.Api.Response.OrderResponse
 {
     public class GetOrderHistoryResponse
     {
         public int Id { get; set; }
-        public GetOrderItemHistoryRespones Item { get; set; }
+        public GetOrderItemHistoryResponse Item { get; set; }
         public string Comment { get; set; }
         public string Address { get; set; }
         public DateTime Creation { get; set; }

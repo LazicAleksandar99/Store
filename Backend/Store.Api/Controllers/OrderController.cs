@@ -8,7 +8,6 @@ using Store.Core.DTOs.OrderDTOs;
 
 namespace Store.Api.Controllers
 {
-    [Authorize]
     public class OrderController : BaseController
     {
         private readonly IOrderService _orderService;

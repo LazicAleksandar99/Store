@@ -20,6 +20,8 @@ namespace Store.Api.Mapper
             CreateMap<UpdatedUserDTO,User>()    
                 .ForMember(dest => dest.Password, opt => opt.Ignore())
                 .ForMember(dest => dest.PasswordKey, opt => opt.Ignore());
+            CreateMap<User, GetSalesmansDTO>();
+            CreateMap<User, GetUserDTO>();
         }
     }
 }

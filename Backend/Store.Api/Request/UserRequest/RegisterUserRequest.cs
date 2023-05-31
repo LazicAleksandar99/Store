@@ -1,4 +1,6 @@
-﻿namespace Store.Api.Request.UserRequest
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Store.Api.Request.UserRequest
 {
     public class RegisterUserRequest
     {
@@ -18,7 +20,7 @@
         [Required]
         public string Password { get; set; }
         [Required]
-        [RegularExpression("^(Customer|Seller)$", ErrorMessage = "Role must be either 'Customer' or 'Seller'.")]
+        [RegularExpression("^(Customer|Salesman)$", ErrorMessage = "Role must be either 'Customer' or 'Seller'.")]
         public string Role { get; set; }
     }
 }
