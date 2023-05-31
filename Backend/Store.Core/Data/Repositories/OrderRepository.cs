@@ -30,7 +30,7 @@ namespace Store.Core.Data.Repositories
             newOrder.Delivery= DateTime.Now.AddHours(1).AddMinutes(randomMinutes);
             newOrder.Status = "Delivering";
             newOrder.Price = (article.Price * newOrder.Item.Quantity) + 20; //for delivery it costs 20
-            newOrder.ArticleName = article.Name;
+            newOrder.Item.ArticleName = article.Name;
             var result = await _data.Orders.AddAsync(newOrder);
             article.Quantity -= newOrder.Item.Quantity;
             await _data.SaveChangesAsync();
@@ -41,7 +41,7 @@ namespace Store.Core.Data.Repositories
         {
             var historys = await _data.Orders
                 .Include(o => o.Item)
-                .Where(o => (o.UserId == id || o.SelesmanId == id) && o.Status == "Delivered")
+                .Where(o => (o.UserId == id || o.SalesmanId == id) && o.Status == "Delivered")
                 .ToListAsync();
             return historys;
         }

@@ -28,7 +28,7 @@ namespace Store.Core.Models
         [Range(0, int.MaxValue)]
         public int Quantity { get; set; }
         [Required]
-        public int SelesmanId { get; set; }
-        public User Selesman { get; set; }
+        public int SalesmanId { get; set; }
+        public User Salesman { get; set; }
     }
 }

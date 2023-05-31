@@ -33,7 +33,7 @@ namespace Store.Core.Data.Repositories
         {
             var oldArticle = await _data.Articles.SingleOrDefaultAsync(x => x.Id == article.Id);
 
-            if (oldArticle != null && oldArticle.SelesmanId == article.SelesmanId)
+            if (oldArticle != null && oldArticle.SalesmanId == article.SalesmanId)
             {
 
                 oldArticle.Name = article.Name;
@@ -46,7 +46,7 @@ namespace Store.Core.Data.Repositories
             }
             return false;
         }
-        public async Task<bool> Delete(int id, int selesmanId)
+        public async Task<bool> Delete(int id, int salesmanId)
         {
             var oldArticle = await _data.Articles.FindAsync(id);
             var itemsToDelete = await _data.Items.Where(a => a.ArticleId == id).ToListAsync();
@@ -62,7 +62,7 @@ namespace Store.Core.Data.Repositories
                 }
             }
 
-            if (oldArticle != null && oldArticle.SelesmanId == selesmanId)
+            if (oldArticle != null && oldArticle.SalesmanId == salesmanId)
             {
                 _data.Items.RemoveRange(itemsToDelete);
                 _data.Orders.RemoveRange(ordersToDelete);

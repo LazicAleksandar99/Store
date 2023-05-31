@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Core.Common.Interfaces.Repositories;
+using Store.Core.DTOs.UserDTOs;
 using Store.Core.Helper;
 using Store.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,11 +40,11 @@ namespace Store.Core.Data.Repositories
             return user;
         }
 
-        public async Task<bool> Register(User newUser)
+        public async Task<bool> Register(User user)
         {
             try
             {
-                _data.Users.Add(newUser);
+                _data.Users.Add(user);
                 await _data.SaveChangesAsync();
                 return true;
             }
@@ -50,6 +52,43 @@ namespace Store.Core.Data.Repositories
             {
                 return false;
             }
+        }
+
+        public async Task<User> Update(UpdatedUserDTO updatedUser)
+        {
+            var user = await _data.Users.SingleOrDefaultAsync(x => x.Id == updatedUser.Id);
+
+            if (!String.IsNullOrWhiteSpace(updatedUser.Newpassword))
+            {
+                byte[] passwordHash, passwordKey;
+
+                using (var hmac = new HMACSHA512())
+                {
+                    passwordKey = hmac.Key;
+                    passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(updatedUser.Newpassword));
+                    user.Password = passwordHash;
+                    user.PasswordKey = passwordKey;
+                }
+            }
+
+            user.Username = updatedUser.Username;
+            user.FirstName = updatedUser.FirstName;
+            user.LastName = updatedUser.LastName;
+            user.Email = updatedUser.Email;
+            user.Address = updatedUser.Address;
+            user.Birthday = updatedUser.Birthday;
+            await _data.SaveChangesAsync();
+            return user;
+        }
+
+        public async Task<bool> CheckPassword(int id, string password)
+        {
+            var user = await _data.Users.FirstOrDefaultAsync(x => x.Id == id);
+            if (user == null || user.PasswordKey == null)
+                return false;
+            if (!_authentication.MatchPasswordHash(password, user.Password!, user.PasswordKey))
+                return false;
+            return true;
         }
 
         public async Task<User> VerifyOrDeny(int userId, string status)
@@ -67,7 +106,7 @@ namespace Store.Core.Data.Repositories
         //da li ovaj user postiji ID
         //da li ovaj salesman postoji ID
 
-        public async Task<bool> Find(Expression<Func<User, bool>> predicate)
+        public async Task<bool> Check(Expression<Func<User, bool>> predicate)
         {
             return await _data.Users.AnyAsync(predicate);
         }
@@ -84,12 +123,12 @@ namespace Store.Core.Data.Repositories
             user.Picture = picture;
             await _data.SaveChangesAsync();
         }
-        public async Task<List<User>> GetSellers()
+        public async Task<List<User>> GetSalesmans()
         {
-            var sellers = await _data.Users.Where(u => u.Role == "Seller").ToListAsync();
-            return sellers;
+            var salesmans = await _data.Users.Where(u => u.Role == "Salesman").ToListAsync();
+            return salesmans;
         }
-        public async Task<User> GetUserDetails(int id)
+        public async Task<User> GetUser(int id)
         {
             var user = await _data.Users.SingleOrDefaultAsync(x => x.Id == id);
             return user;

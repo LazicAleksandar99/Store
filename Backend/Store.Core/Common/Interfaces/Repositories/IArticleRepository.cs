@@ -13,7 +13,7 @@ namespace Store.Core.Common.Interfaces.Repositories
         public Task<bool> Create(Article article);
         public Task<Article> GetArticle(int id);
         public Task<bool> Update(Article article);
-        public Task<bool> Delete(int id, int selesmanId);
+        public Task<bool> Delete(int id, int salesmanId);
         public Task<bool> DoesArticleExistById(int id);
         public Task<IEnumerable<Article>> Find(Expression<Func<Article, bool>> predicate);
     }

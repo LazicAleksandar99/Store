@@ -25,13 +25,11 @@ namespace Store.Core.Models
         [Required]
         public string Address { get; set; }
         [Required]
-        public string ArticleName { get; set; }
-        [Required]
         [StringLength(255)]
         public string Comment { get; set; }
         [Required]
-        public int SellerId { get; set; }
-        public User Seller { get; set; }
+        public int SalesmanId { get; set; }
+        public User Salesman { get; set; }
         [Required]
         public int UserId { get; set; }
         public User User { get; set; }
