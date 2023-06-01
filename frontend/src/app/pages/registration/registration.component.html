@@ -1,0 +1,135 @@
+<div class="bg-image">
+  <section class="vh-100">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+          <div class="card text-black" style="border-radius: 25px;">
+            <div class="card-body p-md-5">
+              <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                  <form [formGroup]="formRegisteration" class="mx-1 mx-md-4">
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="typeName-2">First name</label>
+                        <input type="text" id="typeName-2" class="form-control form-control-lg" formControlName="firstName" />
+                        <br/>
+                        <span *ngIf="!firstName.valid && (firstName.touched)" class="alert alert-danger" >
+                                  Please provide name
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-user fa-lg me-3 fa-fw"></i>  
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="typeLastName-2">Last name</label>
+                        <input type="text" id="typeLastName-2" class="form-control form-control-lg" formControlName="lastName" />
+                        <br/>
+                        <span *ngIf="!lastName.valid && (lastName.touched)" class="alert alert-danger">
+                                  Please provide lastname
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="typeEmailX-2" >Email</label>
+                        <input type="email" id="typeEmailX-2" class="form-control form-control-lg" formControlName="email" />
+                        <br/>
+                        <span *ngIf="!email.valid && (email.touched)" class="alert alert-danger">
+                          <span *ngIf="email.hasError('required')">
+                              Please provide email id
+                          </span>
+                          <span *ngIf="email.hasError('email')">
+                            Please provide valid email id
+                          </span>
+                          <div class="invalid-feedback"> Please provide email id</div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="typeBirthday" >Birthday</label>
+                        <input type="date" id="typeBirthday" min="1900-01-01" max="2023-01-01" value="2022-01-01" class="form-control form-control-lg" formControlName="birthday" >
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="typeAddress-2">Address</label>
+                        <input type="text" id="typeAddress-2" class="form-control form-control-lg" formControlName="address" />
+                        <br/>
+                        <span *ngIf="!address.valid && (address.touched)" class="alert alert-danger">
+                          Please provide address
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="typePasswordX-2" >Password</label>
+                        <input type="password" id="typePasswordX-2" class="form-control form-control-lg" formControlName="password" />
+                        <br/>
+                        <span *ngIf="!password.valid && (password.touched)" class="alert alert-danger">
+                          <span *ngIf="password.hasError('required')">
+                            Please provide password
+                          </span>
+                          <span *ngIf="password.hasError('minlength')">
+                            Password should not be lesser than 8 character
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="typePassword-3">Confirme password</label>
+                        <input type="password" id="typePassword-3" class="form-control form-control-lg" formControlName="confirmPassword" />
+                        <br/>
+                        <span  *ngIf="!confirmPassword.valid && (confirmPassword.touched)" class="alert alert-danger">
+                          <span *ngIf="confirmPassword.hasError('required')">
+                            Please confirm password
+                          </span>
+                          <span *ngIf="formRegisteration.hasError('notmatched') && confirmPassword.valid">
+                            Password not matched
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <button (click)="Register('Customer')" class="btn btn-primary btn-lg">Become our User</button>
+                      <p>&nbsp;&nbsp;</p>
+                      <button (click)="Register('Salesman')" class="btn btn-primary btn-lg">Become Salesman</button>
+                    </div>
+
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                      <p>Already registered? <a routerLink="/login" class="link-primary">Sign in here</a></p>
+
+                    </div>
+                  </form>
+
+                </div>
+                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                    class="img-fluid" alt="Sample pic"/>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

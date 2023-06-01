@@ -1,0 +1,59 @@
+<div *ngIf="userRole">
+  <div [ngSwitch]="userRole">
+    <div *ngSwitchCase="'Administrator'">
+      <div class="grid">
+        <div class="row" style="margin-top: 2.8cm;">
+          <div class="col">
+
+          </div>
+          <div class="col-6">
+            <app-all></app-all>
+          </div>
+          <div class="col">
+            <app-profile-card></app-profile-card>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div *ngSwitchCase="'Customer'">
+      <div class="grid">
+        <div class="row" style="margin-top: 2.8cm;">
+          <div class="col">
+            
+          </div>
+          <div class="col-6" >
+            
+            <app-active></app-active>
+            <app-history></app-history>
+          </div>
+          <div class="col" >
+            <app-profile-card></app-profile-card>
+          </div>
+        </div>
+      </div>  
+    </div>
+  
+    <div *ngSwitchCase="'Salesman'">
+      <div class="grid">
+        <div class="row" style="margin-top: 2.8cm;">
+          <div class="col">
+          </div>
+          <div class="col-6">
+            <app-active></app-active>
+            <app-history></app-history>
+          </div>
+          <div class="col">
+            <app-profile-card></app-profile-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngSwitchDefault>
+      <!-- Default content when no matching role is found -->
+      DEFAULT
+    </div>
+  </div>
+
+  </div>

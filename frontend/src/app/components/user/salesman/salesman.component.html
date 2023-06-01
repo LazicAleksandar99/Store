@@ -1,0 +1,39 @@
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th >Firstname</th>
+        <th >Lastname</th>
+        <th >Email</th>
+        <th >Address</th>
+        <th >Birthday</th>
+        <th >Username</th>
+        <th >Verification</th>
+        <th >Verify or Deny</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container  *ngFor="let salesman of salesmans">
+        <tr >
+          <!-- <td colspan="3" style="text-align: center;"> -->
+            
+          <td>{{salesman.firstName}}</td>
+          <td>{{salesman.lastName}}</td>
+          <th>{{salesman.email}}</th>
+          <td>{{salesman.address}}</td>
+          <td>{{salesman.birthday | date:'MM/dd/yyyy'}}</td>
+          <td>{{salesman.username}}</td>
+          <th>{{salesman.verification}}</th>
+          <!-- </td> -->
+          <th>
+            <ng-container *ngIf="salesman.verification == 'Pending'">
+              <button class="btn btn-success" (click)="Accept(salesman.id)">Accept</button>
+              <button class="btn btn-danger" (click)="Deny(salesman.id)"> Deny it </button>
+            </ng-container>
+            <ng-container *ngIf="salesman.verification != 'Pending'">
+            </ng-container>
+          </th>
+        </tr>
+      </ng-container>
+    </tbody>  
+  </table>

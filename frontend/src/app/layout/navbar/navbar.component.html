@@ -1,0 +1,13 @@
+<header class="mb-auto">
+  <div>
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg bg-body-tertiary fixed-top nav-masthead float-md-end">
+      <h1 class="header-pointer float-md-end mb-0 ms-2" [routerLink]="['/dashboard/main']">Cover</h1>
+      <div class="d-flex ms-auto">
+        <div class="menu-items">
+          <a class="nav-link mt-1" [routerLink]="['profile']">Profile</a>
+          <a class="nav-link active alias" (click)="Logout()">Sign Out</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
