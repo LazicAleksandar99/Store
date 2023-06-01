@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { RegistrationInfo } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -9,9 +12,12 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
   formRegisteration!: FormGroup ;
+  newUser!: RegistrationInfo;
 
   constructor(private router: Router,
-              private fb: FormBuilder,) { }
+              private fb: FormBuilder,
+              private userService: UserService,
+              private toastr: ToastrService,) { }
 
   ngOnInit() {
     this.createRegisterationForm();
@@ -28,15 +34,51 @@ export class RegistrationComponent implements OnInit {
       address: ["Strazilovska",[Validators.required]],
       password: ["password", [Validators.required, Validators.minLength(8)]],
       confirmPassword: ["password", Validators.required],
-    },{validators: this.passwordMatchingValidatior});
+    },{validators: this.doPasswordsMatchValidatior});
   }
 
   Register(role: string){
+    if (this.formRegisteration.valid) {
+        this.userService.register(this.newUserInfo(role)).subscribe(
+          data=>{
+            this.toastr.success('Registred successfully!', 'Succes!', {
+              timeOut: 3000,
+              closeButton: true,
+            });
+            this.router.navigate(['/login']);
+          }, error =>{
+            this.toastr.error("Invalid input", 'Error!' , {
+              timeOut: 3000,
+              closeButton: true,
+            });
+          }
 
+        );
+      
+    }
+    else{
+      this.toastr.error("Invalid input", 'Error!' , {
+        timeOut: 3000,
+        closeButton: true,
+      });
+    }
   }
 
   Login(){
     this.router.navigateByUrl('/register')
+  }
+
+  newUserInfo(userRole: string): RegistrationInfo {
+    return this.newUser = {
+        username: this.username.value,
+        email: this.email.value,
+        firstName: this.firstName.value,
+        lastName: this.lastName.value,
+        birthday: this.formRegisteration.value['birthday'],
+        address: this.address.value,
+        role: userRole,
+        password: this.password.value
+    };
   }
 
   get username() {
@@ -62,7 +104,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   
-  passwordMatchingValidatior(fg: FormGroup): Validators {
+  doPasswordsMatchValidatior(fg: FormGroup): Validators {
     return fg.get('password')?.value === fg.get('confirmPassword')?.value ? true : {notmatched: true};
 }
 }

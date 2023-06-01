@@ -163,7 +163,7 @@ body {
     box-sizing: border-box;
   }
   
-  button {
+  button.primar {
     background-color: #4CAF50;
     color: white;
     border: none;
@@ -172,6 +172,19 @@ body {
     cursor: pointer;
   }
   
-  button:hover {
+  button.primar:hover {
     background-color: #3e8e41;
+  }
+  
+  button.danger {
+    background-color: #ec3f3f;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button.danger:hover {
+    background-color: #b62400;
   }

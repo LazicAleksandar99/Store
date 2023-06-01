@@ -60,7 +60,7 @@ namespace Store.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPatch("cancel")]
+        [HttpPatch("cancel")]   
         [Authorize(Roles = "Customer")]
         public async Task<IActionResult> CancelOrder(CancleOrderRequest cancel)
         {

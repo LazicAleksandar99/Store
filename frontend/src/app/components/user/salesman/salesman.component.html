@@ -27,8 +27,8 @@
           <!-- </td> -->
           <th>
             <ng-container *ngIf="salesman.verification == 'Pending'">
-              <button class="btn btn-success" (click)="Accept(salesman.id)">Accept</button>
-              <button class="btn btn-danger" (click)="Deny(salesman.id)"> Deny it </button>
+              <button class="btn btn-success primar" (click)="Verify(salesman.id, 'Verified')">Verfiy</button>
+              <button class="btn btn-primary danger" (click)="Verify(salesman.id, 'Denied')"> Deny</button>
             </ng-container>
             <ng-container *ngIf="salesman.verification != 'Pending'">
             </ng-container>

@@ -4,7 +4,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { RouteGuard } from './core/route.guard';
-import { ProfileComponent } from './components/user/profile/profile.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardTemplateComponent } from './pages/dashboard-template/dashboard-template.component';
 
 // all: {

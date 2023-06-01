@@ -27,4 +27,22 @@ export class SalesmanComponent implements OnInit {
       }
     );
   }
+
+  Verify(id: number, status: string){
+    this.userService.verify(id,status).subscribe(
+      data=>{
+        this.toastr.success('User verified successfully!', 'Succes!', {
+          timeOut: 3000,
+          closeButton: true,
+        });
+      }, error =>{
+        this.toastr.error("Something went wrong", 'Error!', {
+          timeOut: 3000,
+          closeButton: true,
+        });
+      }
+
+    );
+  }
+
 }

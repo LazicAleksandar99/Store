@@ -76,11 +76,11 @@ namespace Store.Api.Controllers
 
         [HttpPatch("verify/{id}")]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> VerifyOrDeny(int id,VerifyOrDenyUserRequest status)
+        public async Task<IActionResult> VerifyOrDeny(int id,VerifyOrDenyUserRequest verification)
         {
             if (id <= 0)
                 return BadRequest("Invalid user id");
-            if (!await _userService.VerifyOrDeny(id, status.Action))
+            if (!await _userService.VerifyOrDeny(id, verification.Action))
                 return BadRequest("No users found with this id");
             return Ok();
         }

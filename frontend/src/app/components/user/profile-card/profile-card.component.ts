@@ -18,7 +18,7 @@ export class ProfileCardComponent implements OnInit {
     this.getUser();
   }
   getUser(){
-    this.userService.getDetails(this.tokenService.getUserId(localStorage.getItem('token') as string)).subscribe(
+    this.userService.getUser(this.tokenService.getUserId(localStorage.getItem('token') as string)).subscribe(
       data=>{
         this.user = data as User;
       }, error =>{

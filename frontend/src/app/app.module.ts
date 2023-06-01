@@ -17,7 +17,7 @@ import { HistoryComponent } from './components/order/history/history.component';
 import { ActiveComponent } from './components/order/active/active.component';
 import { AllComponent } from './components/order/all/all.component';
 import { ProfileCardComponent } from './components/user/profile-card/profile-card.component';
-import { ProfileComponent } from './components/user/profile/profile.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardTemplateComponent } from './pages/dashboard-template/dashboard-template.component';
 import { SalesmanComponent } from './components/user/salesman/salesman.component';
 
