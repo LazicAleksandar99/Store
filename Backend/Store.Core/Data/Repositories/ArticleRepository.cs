@@ -40,7 +40,8 @@ namespace Store.Core.Data.Repositories
                 oldArticle.Price = article.Price;
                 oldArticle.Quantity = article.Quantity;
                 oldArticle.Description = article.Description;
-                oldArticle.Picture = article.Picture;
+                if(!String.IsNullOrWhiteSpace( article.Picture))
+                    oldArticle.Picture = article.Picture;
                 await _data.SaveChangesAsync();
                 return true;
             }

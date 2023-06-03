@@ -94,7 +94,7 @@
                 Order history
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" *ngIf="userRole =='Salesman'">
               <a class="nav-link pointer" (click)="scrollToSection('attachments')">
                 <span data-feather="users"></span>
                 New article
@@ -173,13 +173,13 @@
             </section>
           </div>
           <br/>
-          <div class="card">
+          <div class="card" *ngIf="userRole == 'Salesman'">
             <section id="attachments">
               <div class="card-header">
                 <h2 style="color:black">New article</h2>
               </div>
               <div style="background-color: #fadaba;">
-                <div *ngIf="userRole == 'Salesman'" style="margin: auto ;max-width: 40rem;">
+                <div  style="margin: auto ;max-width: 40rem;">
                   <app-add-article></app-add-article >
                 </div>
               </div>

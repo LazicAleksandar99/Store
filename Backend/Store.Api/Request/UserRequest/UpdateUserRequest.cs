@@ -13,8 +13,8 @@ namespace Store.Api.Request.UserRequest
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        public string Newpassword { get; set; }
-        public string Oldpassword { get; set; }
+        public string? Newpassword { get; set; }
+        public string? Oldpassword { get; set; }
         [Required]
         [StringLength(100)]
         public string FirstName { get; set; }
@@ -26,5 +26,6 @@ namespace Store.Api.Request.UserRequest
         [Required]
         [StringLength(255)]
         public string Address { get; set; }
+        public IFormFile? File { get; set; }
     }
 }

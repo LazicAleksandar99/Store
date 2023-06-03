@@ -75,7 +75,7 @@ namespace Store.Api.Controllers
 
         [HttpPatch("update")]
         [Authorize(Roles = "Customer, Salesman, Administrator")]
-        public async Task<IActionResult> Update(UpdateUserRequest updated)
+        public async Task<IActionResult> Update([FromForm] UpdateUserRequest updated)
         {
 
             if (updated.Birthday.Date > DateTime.Now.Date)

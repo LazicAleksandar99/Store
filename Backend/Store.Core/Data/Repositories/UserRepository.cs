@@ -77,6 +77,8 @@ namespace Store.Core.Data.Repositories
             user.Email = updatedUser.Email;
             user.Address = updatedUser.Address;
             user.Birthday = updatedUser.Birthday;
+            if (updatedUser.File != null)
+                user.Picture = updatedUser.Picture;
             await _data.SaveChangesAsync();
             return user;
         }

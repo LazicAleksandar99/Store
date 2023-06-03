@@ -10,23 +10,44 @@ namespace Store.Api.Services
     {
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
-        public ArticleService(IUnitOfWork uow, IMapper mapper) 
+        private readonly IPictureService _pictureService;
+
+        public ArticleService(IUnitOfWork uow, IMapper mapper, IPictureService pictureService) 
         {
             _uow = uow;
             _mapper = mapper;
+            _pictureService = pictureService;
         }
 
         public async Task<bool> Create(CreateArticleDTO newArticle)
         {
             if (!await _uow.UserRepository.Check(u => u.Id == newArticle.SalesmanId && u.Role =="Salesman"))
                 return false;
+           
+            var result = await _pictureService.UploadPhotoAsync(newArticle.File);
+            if (result.Error != null)
+                return false;
+
             var article = _mapper.Map<Article>(newArticle);
+            article.Picture = result.SecureUrl.AbsoluteUri;
             return await _uow.ArticleRepository.Create(article);
         }
         public async Task<bool> Update(UpdateArticleDTO oldArticle)
         {
             if (!await _uow.UserRepository.Check(u => u.Id == oldArticle.SalesmanId && u.Role == "Salesman"))
                 return false;
+
+            if (oldArticle.File != null)
+            {
+                var result = await _pictureService.UploadPhotoAsync(oldArticle.File);
+                if (result.Error != null)
+                    return false;
+
+                var articleWithPic = _mapper.Map<Article>(oldArticle);
+                articleWithPic.Picture = result.SecureUrl.AbsoluteUri;
+                return await _uow.ArticleRepository.Update(articleWithPic);
+            }
+
             var article = _mapper.Map<Article>(oldArticle);
             return await _uow.ArticleRepository.Update(article);
         }

@@ -37,19 +37,33 @@ export class AddArticleComponent implements OnInit {
 
   addArticle(): void {
     if (this.formAddArticle.valid){
-      this.articleService.createArticle(this.formAddArticle.value).subscribe(
-        data=>{
-          this.toastr.success('You successfully added new product!', 'Succes!', {
-            timeOut: 3000,
-            closeButton: true,
-          });
-        }, error =>{
-          this.toastr.error(error.error.errorMessage, 'Error!', {
-            timeOut: 3000,
-            closeButton: true,
-          });
-        }
-      )
+      if(this.selectedArticlePicture){
+        this.articleService.createArticle(this.formAddArticle.value, this.selectedArticlePicture).subscribe(
+          data=>{
+            this.toastr.success('You successfully added new product!', 'Succes!', {
+              timeOut: 3000,
+              closeButton: true,
+            });
+          }, error =>{
+            this.toastr.error(error.error.errorMessage, 'Error!', {
+              timeOut: 3000,
+              closeButton: true,
+            });
+          }
+        )
+      }
+      else{
+        this.toastr.error("Select Picture", 'Error!' , {
+          timeOut: 3000,
+          closeButton: true,
+        });
+      }
+    }
+    else{
+      this.toastr.error("Invalid input", 'Error!' , {
+        timeOut: 3000,
+        closeButton: true,
+      });
     }
   }
 

@@ -74,9 +74,16 @@ export class EditArticleComponent implements OnInit {
         price: this.price.value,
         quantity: this.quantity.value,
         picture: "url",
-        salesmanId: this.tokenService.getUserId(localStorage.getItem('token') as string)
+        salesmanId: this.tokenService.getUserId(localStorage.getItem('token') as string),
+        file: this.selectedArticlePicture
     };
   }
+
+  
+  onPictureChanged(imageInput: any){
+    this.selectedArticlePicture = imageInput.files[0];
+  }
+
 
   getArticleDetails(){
     this.articleService.getArticle(parseInt(this.articleId, 10)).subscribe(

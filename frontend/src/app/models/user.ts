@@ -36,7 +36,8 @@ export interface UpdatedUser{
     firstName: string,
     lastName: string,
     birthday: Date,
-    address: string
+    address: string,
+    picture: File
 }
 
 export interface VerifyOrDeny{

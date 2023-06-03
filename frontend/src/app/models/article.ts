@@ -6,6 +6,7 @@ export interface Article{
     description: string;
     picture: string;
     salesmanId: number;
+    file: File
 }
 
 export interface CreateArticle {
@@ -15,4 +16,5 @@ export interface CreateArticle {
     description: string;
     picture: string;
     salesmanId: number;
+    file: File
 }

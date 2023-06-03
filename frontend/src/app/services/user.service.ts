@@ -35,7 +35,19 @@ export class UserService {
   }
   
   update(updatedUser: UpdatedUser){
-    return this.http.patch(this.baseUrl + '/api/user/update', updatedUser, this.headersService.getHttpHeaderWithToken());
+    const formDataUpdate: FormData = new FormData();
+
+    formDataUpdate.append('id' , updatedUser.id.toString());
+    formDataUpdate.append('address' , updatedUser.address);
+    formDataUpdate.append('birthday',updatedUser.birthday.toString());
+    formDataUpdate.append('email',updatedUser.email);
+    formDataUpdate.append('firstName',updatedUser.firstName);
+    formDataUpdate.append('lastName',updatedUser.lastName);
+    formDataUpdate.append('newpassword',updatedUser.newpassword || '');
+    formDataUpdate.append('oldpassword',updatedUser.oldpassword || '');
+    formDataUpdate.append('file',updatedUser.picture);
+    formDataUpdate.append('username',updatedUser.username);
+    return this.http.patch(this.baseUrl + '/api/user/update', formDataUpdate, this.headersService.getHttpHeaderWithToken());
   }
 
 

@@ -30,6 +30,12 @@
               <textarea class="form-control" formControlName="description" id="description" rows="3" placeholder="Description"></textarea>
               <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">Please provide a valid description.</div>
             </div>
+            <div class="card-footer">
+              <div class="profile-picture">
+                <label for="profile-picture">Article Picture</label>
+                <input type="file" id="profile-picture" #imageInput accept="image/*" (change)="onPictureChanged(imageInput)">
+              </div>
+            </div>
             <div class="text-center">
               <button class="btn btn-primary" type="button" (click)="SaveChanges()">Save Article</button>
             </div>

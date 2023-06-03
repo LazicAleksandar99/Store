@@ -44,6 +44,7 @@ export class RegistrationComponent implements OnInit {
 
   Register(role: string){
     if (this.formRegisteration.valid) {
+      if(this.selectedProfilePicture){
         this.userService.register(this.newUserInfo(role)).subscribe(
           data=>{
             this.toastr.success('Registred successfully!', 'Succes!', {
@@ -59,7 +60,13 @@ export class RegistrationComponent implements OnInit {
           }
 
         );
-      
+      }
+      else{
+        this.toastr.error("Select Picture", 'Error!' , {
+          timeOut: 3000,
+          closeButton: true,
+        });
+      }
     }
     else{
       this.toastr.error("Invalid input", 'Error!' , {

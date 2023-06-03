@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace Store.Core.DTOs.ArticleDTOs
         public string Description { get; set; }
         public string Picture { get; set; }
         public int SalesmanId { get; set; }
+        public IFormFile File {get; set; }
     }
 }

@@ -19,15 +19,15 @@ namespace Store.Api.Services
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly IEmailService _emailService;
-        //private readonly IPhotoService _photoService;
+        private readonly IPictureService _pictureService;
 
-        public UserService(IConfiguration configuration, IUnitOfWork uow, IMapper mapper, IEmailService emailService) //IPhotoService photoService)
+        public UserService(IConfiguration configuration, IUnitOfWork uow, IMapper mapper, IEmailService emailService, IPictureService pictureService)
         {
             _configuration = configuration;
             _uow = uow;
             _mapper = mapper;
             _emailService = emailService;
-            //_photoService = photoService;
+            _pictureService = pictureService;
         }
 
         public async Task<string> Login(LoginUserDTO loginUser)
@@ -61,7 +61,12 @@ namespace Store.Api.Services
                 user.Verification = "Verified";
             else
                 user.Verification = "Pending";
-            user.Picture = "";
+
+            var result = await _pictureService.UploadPhotoAsync(newUser.File);
+            if (result.Error != null)
+                return false;
+
+            user.Picture = result.SecureUrl.AbsoluteUri;
             var response = await _uow.UserRepository.Register(user);
 
             if (!response)
@@ -80,12 +85,30 @@ namespace Store.Api.Services
 
             if (String.IsNullOrWhiteSpace(updatedUser.Newpassword) && String.IsNullOrWhiteSpace(updatedUser.Oldpassword))
             {
+                if(updatedUser.File != null)
+                {
+                    var result = await _pictureService.UploadPhotoAsync(updatedUser.File);
+                    if (result.Error != null)
+                        return false;
+
+                    updatedUser.Picture = result.SecureUrl.AbsoluteUri;
+                }
                 await _uow.UserRepository.Update(updatedUser);
             }
             else if (!String.IsNullOrWhiteSpace(updatedUser.Newpassword) && !String.IsNullOrWhiteSpace(updatedUser.Oldpassword))
             {
                 if (await _uow.UserRepository.CheckPassword(updatedUser.Id, updatedUser.Oldpassword))
+                {
+                    if (updatedUser.File != null)
+                    {
+                        var result = await _pictureService.UploadPhotoAsync(updatedUser.File);
+                        if (result.Error != null)
+                            return false;
+
+                        updatedUser.Picture = result.SecureUrl.AbsoluteUri;
+                    }
                     await _uow.UserRepository.Update(updatedUser);
+                }
                 else
                     return false;
             }

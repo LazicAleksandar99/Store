@@ -20,7 +20,7 @@ namespace Store.Api.Controllers
 
         [HttpPost("create")]
         [Authorize(Roles = "Salesman")]
-        public async Task<IActionResult> Create(CreateArticleRequest newArticle)
+        public async Task<IActionResult> Create([FromForm] CreateArticleRequest newArticle)
         {
             var article = _mapper.Map<CreateArticleDTO>(newArticle);
             if (!await _articleService.Create(article))
@@ -43,7 +43,7 @@ namespace Store.Api.Controllers
 
         [HttpPatch("update")]
         [Authorize(Roles = "Salesman")]
-        public async Task<IActionResult> Update(UpdateArticleRequest updatedArticle)
+        public async Task<IActionResult> Update([FromForm] UpdateArticleRequest updatedArticle)
         {
             var article = _mapper.Map<UpdateArticleDTO>(updatedArticle);
             if (!await _articleService.Update(article))

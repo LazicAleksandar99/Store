@@ -43,12 +43,21 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  isFormValid(): boolean {
+    return this.formUpdate.controls['username'].valid &&
+      this.formUpdate.controls['email'].valid &&
+      this.formUpdate.controls['firstname'].valid &&
+      this.formUpdate.controls['lastname'].valid &&
+      this.formUpdate.controls['birthday'].valid &&
+      this.formUpdate.controls['address'].valid;
+  }
+
   onPictureChanged(imageInput: any){
     this.selectedProfilePicture = imageInput.files[0];
   }
 
   Update(){
-    if (this.formUpdate.valid) {
+    if (this.isFormValid()) {
         this.userService.update(this.updatedUserData()).subscribe(
           data=>{
             this.toastr.success('Successfully updated', 'Succes!', {
@@ -83,7 +92,8 @@ export class ProfileComponent implements OnInit {
         birthday: this.formUpdate.value['birthday'],
         address: this.address.value,
         oldpassword: this.oldpassword.value,
-        newpassword: this.newpassword.value
+        newpassword: this.newpassword.value,
+        picture: this.selectedProfilePicture
     };
   }
 
