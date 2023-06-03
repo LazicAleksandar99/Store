@@ -1,4 +1,4 @@
-<div *ngIf="userRole">
+<!-- <div *ngIf="userRole">
   <div [ngSwitch]="userRole">
     <div *ngSwitchCase="'Administrator'">
       <div class="grid">
@@ -24,8 +24,8 @@
             
           </div>
           <div class="col-6" >
-            
             <app-active></app-active>
+            <app-all-article></app-all-article>
             <app-history></app-history>
           </div>
           <div class="col" >
@@ -39,9 +39,11 @@
       <div class="grid">
         <div class="row" style="margin-top: 2.8cm;">
           <div class="col">
+            <app-add-article></app-add-article>
           </div>
           <div class="col-6">
             <app-active></app-active>
+            <app-salesman-articles></app-salesman-articles>
             <app-history></app-history>
           </div>
           <div class="col">
@@ -52,9 +54,137 @@
     </div>
   
     <div *ngSwitchDefault>
-      <!-- Default content when no matching role is found -->
-      DEFAULT
+    
     </div>
   </div>
 
+  </div> -->
+  <div class="container-fluid mt-2">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="background-color: #bafafa;">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <br/>
+              <br/>
+              <a class="nav-link pointer" (click)="scrollToSection('todolist')" aria-current="page">
+                <span data-feather="home"></span>
+                <div *ngIf="userRole =='Customer' || userRole == 'Salesman'">
+                  Articles
+                </div>
+                <div *ngIf="userRole =='Administrator'" >
+                  Salesman
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pointer" (click)="scrollToSection('tasks')">
+                <span data-feather="file"></span>
+                <div *ngIf="userRole =='Customer' || userRole == 'Salesman'">
+                  Active orders
+                </div>
+                <div *ngIf="userRole =='Administrator'" >
+                  All orders
+                </div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pointer" (click)="scrollToSection('reminder')">
+                <span data-feather="shopping-cart"></span>
+                Order history
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link pointer" (click)="scrollToSection('attachments')">
+                <span data-feather="users"></span>
+                New article
+              </a>
+            </li>
+          </ul>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <app-profile-card></app-profile-card>
+        </div>
+      </nav>
+      
+  
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <br/>     
+          </div>
+  
+          <div class="card">
+            <section id="todolist">
+              <div class="card-header" style="background-color: #bafafa;">
+                <h2 *ngIf="userRole =='Customer' || userRole == 'Salesman'" style="color:black">Articles</h2>
+                <h2 *ngIf="userRole =='Administrator'" style="color:black">Salesman</h2>
+              </div>
+              <div style="margin: auto;background-color: #fadaba;">
+                  <div *ngIf="userRole == 'Customer'" >
+                    <app-all-article></app-all-article>
+                  </div>
+                  <div *ngIf="userRole == 'Salesman'" >
+                    <app-salesman-articles></app-salesman-articles>
+                  </div>
+                  <div *ngIf="userRole == 'Administrator'">
+                    <app-salesman></app-salesman>
+                  </div>
+              </div>
+            </section>
+          </div>
+  
+          <br/>
+  
+          <div class="card">
+          <section id="tasks">
+            <div class="card-header">
+              <h2 *ngIf="userRole =='Customer' || userRole == 'Salesman'" style="color:black">Active orders</h2>
+              <h2 *ngIf="userRole =='Administrator'" style="color:black">All orders</h2>
+            </div>
+  
+            <div class="container" style="background-color: #fadaba;">
+              <div *ngIf="userRole == 'Customer'">
+                <app-active></app-active>
+              </div>
+              <div *ngIf="userRole == 'Salesman'">
+                <app-active></app-active>
+              </div>
+              <div *ngIf="userRole == 'Administrator'">
+                <app-all></app-all>
+              </div>
+            </div>
+          </section>
+          </div>
+          <br/>
+  
+          <div class="card">
+            <div class="card-header">
+              <h2 style="color:black">Order history</h2>
+            </div>
+            <section id="reminder"  style="background-color: #fadaba;">
+              <div *ngIf="userRole == 'Customer'">
+                <app-history></app-history>
+              </div>
+              <div *ngIf="userRole == 'Salesman'">
+                <app-history></app-history>
+              </div>
+            </section>
+          </div>
+          <br/>
+          <div class="card">
+            <section id="attachments">
+              <div class="card-header">
+                <h2 style="color:black">New article</h2>
+              </div>
+              <div style="background-color: #fadaba;">
+                <div *ngIf="userRole == 'Salesman'" style="margin: auto ;max-width: 40rem;">
+                  <app-add-article></app-add-article >
+                </div>
+              </div>
+            </section>
+          </div>
+      </main>
+    </div>
   </div>

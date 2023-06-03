@@ -1,0 +1,97 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-top: 3cm;
+}
+
+.card {
+  width: 60%; /* Adjust the width as needed */
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+  
+  .card-header {
+    background-color: #f8f9fa;
+    border-bottom: none;
+    padding: 15px;
+  }
+  
+  .card-title {
+    margin-bottom: 0;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .user-info {
+    margin-left: 20px;
+  }
+  
+  .name {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .email {
+    color: #888;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    border-radius: 0;
+  }
+  
+  .invalid-feedback {
+    color: #dc3545;
+    display: block;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
+  .profile-button {
+    border-radius: 0;
+    width: 150px;
+  }
+  
+  .card-footer {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-top: none;
+  }
+  
+  .profile-picture {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-picture label {
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+  
+  .profile-picture input[type="file"] {
+    display: none;
+  }
+  

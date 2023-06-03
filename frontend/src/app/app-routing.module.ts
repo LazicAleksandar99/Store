@@ -6,6 +6,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { RouteGuard } from './core/route.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardTemplateComponent } from './pages/dashboard-template/dashboard-template.component';
+import { EditArticleComponent } from './pages/edit-article/edit-article.component';
 
 // all: {
 //   r1: "Customer",
@@ -43,6 +44,12 @@ const routes: Routes = [
           r1: "Customer",
           r2: "Salesman",
           r3: "Administrator"
+        }
+      },
+      {
+        path:'article/:id', component: EditArticleComponent, canActivate: [RouteGuard],
+        data: {
+          r2: "Salesman",
         }
       },
     ]

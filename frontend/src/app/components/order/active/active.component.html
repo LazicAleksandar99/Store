@@ -11,9 +11,10 @@
         <th >Quantity</th>
         <th >Delivery Price </th>
         <th >Total Price</th>
+        <th *ngIf="userRole == 'Customer'">Cancel order</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="background-color: white;">
       <ng-container  *ngFor="let order of active">
         <tr >
           <!-- <td colspan="3" style="text-align: center;"> -->
@@ -27,7 +28,12 @@
             <td>20</td>
             <td>{{order.price}}</td>
           <!-- </td> -->
-          
+            <td *ngIf="userRole == 'Customer'"><ng-container>
+              <button class="btn btn-danger" (click)="Cancel(order.id)">Cancel</button>
+              </ng-container>
+              <ng-container >
+              </ng-container>
+            </td>
         </tr>
       </ng-container>
     </tbody>  

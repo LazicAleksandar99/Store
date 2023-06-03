@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="avatar-container">
+            <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="avatar" class="rounded-circle img-fluid">
+          </div>
+        </div>
+        <div class="col-md-8">
+          <h4 class="card-title">Edit Article</h4>
+          <form [formGroup]="updateArticleForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" formControlName="name" id="name" placeholder="Name">
+              <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">Please provide a valid name.</div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" formControlName="price" id="price" min="0" max="10000" placeholder="Price">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="quantity">Quantity</label>
+                <input type="number" class="form-control" formControlName="quantity" id="quantity" min="0" max="10000" placeholder="Quantity">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" formControlName="description" id="description" rows="3" placeholder="Description"></textarea>
+              <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">Please provide a valid description.</div>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-primary" type="button" (click)="SaveChanges()">Save Article</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

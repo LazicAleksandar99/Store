@@ -1,0 +1,64 @@
+<div class="container text-center" [style.paddingTop]="'4%'" [style.paddingBottom]="'2%'">
+  <div class="row" [style.paddingTop]="'1rem'">
+    <!-- <div class="col-3" [style.backgroundColor]="'white'" [style.height]="'800px'" [style.paddingTop]="'2%'">
+      <div class='home_panelList-wrap'>
+        <div class='home_panel-wrap'>
+          <app-filter-panel
+            [value]="searchInput"
+            (changeInput)="setSearchInput($event.target.value)"
+            [selectedPrice]="selectedPrice"
+            (changePrice)="handleChangePrice($event)"
+          ></app-filter-panel>
+        </div>
+      </div>
+    </div> -->
+    <div class="col-9">
+      <div class='product_list'>
+        <div *ngFor="let article of articlesData | paginate: {itemsPerPage: 6, currentPage: page}">
+          <div>
+            <div class='card'>
+              <div class='card_image'>
+                <img [src]="article.picture" [alt]="'InvalidUrl'" />
+              </div>
+              <div class='card_info'>
+                <h2> {{article.name}} </h2>
+                <h5> {{article.price}} $ </h5>
+                <h3> {{article.description}} </h3>
+                <form [formGroup]="orderForm">
+                  <div class="col-md-6">
+                    <label class="labels">Quantity</label>
+                    <input class="form-control"  formControlName="quantity" id="numberId" type="number" min="1" max="10000"  style="text-align:center ;">
+                  </div>
+                  <input type="text" class="form-control" formControlName="address" placeholder="address" >
+                  <span *ngIf="!address.valid && (address.touched)"class="alert alert-danger">
+                      Please provide address
+                  </span>
+                  <input type="text" class="form-control" formControlName="comment" placeholder="comment" >
+                  <span *ngIf="!comment.valid && (comment.touched)"class="alert alert-danger">
+                      Please provide comment
+                  </span>                
+                </form>     
+                <button class="btn btn-success" (click)="Order(article)" >Make an order</button>
+              </div>
+            </div>
+            <!-- <ng-container *ngIf="role === 'creator'">
+              <button *ngIf="role === 'creator'" type="button" (click)="deletedProduct($event, id)" class="btn btn-danger">Delete</button>
+            </ng-container> -->
+          </div>
+        </div>
+        <pagination-controls (pageChange)="page = $event" style="margin-left: 260px;"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+export interface Article{
+  id : number;
+  name: string;
+  price: number;
+  quantity: number;
+  description: string;
+  picture: string;
+  userId: number;
+} -->

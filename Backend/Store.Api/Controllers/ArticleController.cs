@@ -37,7 +37,7 @@ namespace Store.Api.Controllers
                 return BadRequest("Invalid id");
             var result = await _articleService.GetArticle(id);
             if (result == null)
-                return BadRequest("User does not exist");
+                return BadRequest("Article does not exist");
             return Ok(result);
         }
 
@@ -67,6 +67,15 @@ namespace Store.Api.Controllers
             if (result == null)
                 return BadRequest("Not salesman exist with this id");
             return Ok(result);
+        }
+
+        [HttpDelete("delete/{articleId}/{salesmanId}")]
+        [Authorize(Roles = "Salesman")]
+        public async Task<IActionResult> Delete(int articleId, int salesmanId)
+        {
+            if (!await _articleService.Delete(articleId, salesmanId))
+                return BadRequest("Invalid id-s");
+            return Ok();
         }
     }
 }

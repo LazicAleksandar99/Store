@@ -23,10 +23,10 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private tokenService: TokenService) {
-      this.createUpdateForm(); 
     }
 
-  ngOnInit() {
+  ngOnInit() {      
+    this.createUpdateForm(); 
     this.getUser();
   }
 

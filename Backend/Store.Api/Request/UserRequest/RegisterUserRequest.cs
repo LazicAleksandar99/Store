@@ -22,5 +22,7 @@ namespace Store.Api.Request.UserRequest
         [Required]
         [RegularExpression("^(Customer|Salesman)$", ErrorMessage = "Role must be either 'Customer' or 'Seller'.")]
         public string Role { get; set; }
+        [Required]
+        public IFormFile File { get; set; }
     }
 }

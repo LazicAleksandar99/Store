@@ -13,3 +13,7 @@ export interface ActiveItem{
     quantity: number,
     articleName: string,
 }
+export interface MakeItem{
+    quantity: number,
+    articleId: number,
+}

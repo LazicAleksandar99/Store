@@ -19,7 +19,19 @@ export class UserService {
   }
 
   register(newUser: RegistrationInfo){
-    return this.http.post(this.baseUrl + '/api/user/register', newUser, this.headersService.getHttpHeaderNoToken());
+    const formData: FormData = new FormData();
+
+    formData.append('address' , newUser.address);
+    formData.append('birthday',newUser.birthday.toString());
+    formData.append('email',newUser.email);
+    formData.append('firstName',newUser.firstName);
+    formData.append('lastName',newUser.lastName);
+    formData.append('password',newUser.password);
+    formData.append('file',newUser.picture);
+    formData.append('role',newUser.role);
+    formData.append('username',newUser.username);
+
+    return this.http.post(this.baseUrl + '/api/user/register', formData, this.headersService.getHttpHeaderNoToken());
   }
   
   update(updatedUser: UpdatedUser){

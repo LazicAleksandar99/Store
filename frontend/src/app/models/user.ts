@@ -24,6 +24,7 @@ export interface RegistrationInfo{
     address: string,
     password: string,
     role: string,
+    picture: File,
 }
 
 export interface UpdatedUser{

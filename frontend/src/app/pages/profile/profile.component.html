@@ -1,93 +1,82 @@
-<div class="card mb-4 shadow-lg" style="margin-top: 2.5cm;">
-  <div class="container rounded bg-white mt-5 mb-5">
-    <div *ngIf="user" class="row">
-      <div class="col-md-3 border-right">
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-          <div *ngIf="user && user.picture; else elseBlock">
-            <img src="{{ user.picture }}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px; height: 150px;">
-          </div>
+<div class="card-container">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Profile</h4>
+    </div>
+    <div *ngIf="user" class="card-body">
+      <div class="profile">
+        <div class="avatar">
+          <img *ngIf="user.picture; else elseBlock" [src]="user.picture" alt="avatar">
           <ng-template #elseBlock>
-            <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+            <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="avatar">
           </ng-template>
-          <span class="font-weight-bold">{{ user.firstName }}</span>
-          <span class="text-black-50">{{ user.email }}</span>
+        </div>
+        <div class="user-info">
+          <span class="name">{{ user.firstName }}</span>
+          <span class="email">{{ user.email }}</span>
         </div>
       </div>
-      <div class="col-md-5 border-right">
-        <div class="p-3 py-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h4 class="text-right">Profile Settings</h4>
-          </div>
-          <form [formGroup]="formUpdate">
-            <div class="row mt-2">
-              <div class="col-md-6">
-                <label class="labels">First Name</label>
-                <input type="text" class="form-control" formControlName="firstname" placeholder="First Name">
-                <span *ngIf="!firstname.valid && firstname.touched" class="alert alert-danger">
-                  Please provide a valid first name.
-                </span>
-              </div>
-              <div class="col-md-6">
-                <label class="labels">Last Name</label>
-                <input type="text" class="form-control" formControlName="lastname" placeholder="Last Name">
-                <span *ngIf="!lastname.valid && lastname.touched" class="alert alert-danger">
-                  Please provide a valid last name.
-                </span>
-              </div>
-            </div>
-            <div class="row mt-3">
-              <div class="col-md-12">
-                <label class="labels">Username</label>
-                <input type="text" class="form-control" formControlName="username" placeholder="Username">
-                <span *ngIf="!username.valid && username.touched" class="alert alert-danger">
-                  Please provide a valid username.
-                </span>
-              </div>
-              <div class="col-md-12">
-                <label class="labels">Email</label>
-                <input type="text" class="form-control" formControlName="email" placeholder="Email">
-                <span *ngIf="!email.valid && email.touched" class="alert alert-danger">
-                  <span *ngIf="email.hasError('required')">Please provide an email.</span>
-                  <span *ngIf="email.hasError('email')">Please provide a valid email.</span>
-                </span>
-              </div>
-              <div class="col-md-12">
-                <label class="labels">Address</label>
-                <input type="text" class="form-control" formControlName="address" placeholder="Address">
-                <span *ngIf="!address.valid && address.touched" class="alert alert-danger">
-                  Please provide a valid address.
-                </span>
-              </div>
-              <div class="col-md-12">
-                <label class="labels">Birthday</label>
-                <input type="date" class="form-control" formControlName="birthday" min="1900-01-01" max="2023-01-01">
-              </div>
-              <div class="col-md-12">
-                <label class="labels">Old Password</label>
-                <input type="password" class="form-control" formControlName="oldpassword" placeholder="Old Password">
-                <span *ngIf="!oldpassword.valid && oldpassword.touched" class="alert alert-danger">
-                  <span *ngIf="oldpassword.hasError('minlength')">Password should be at least 8 characters long.</span>
-                </span>
-              </div>
-              <div class="col-md-12">
-                <label class="labels">New Password</label>
-                <input type="password" class="form-control" formControlName="newpassword" placeholder="New Password">
-              </div>
-            </div>
-          </form>
-          <div class="row mt-3"></div>
-          <div class="mt-5 text-center">
-            <button class="btn btn-primary profile-button" type="button" (click)="Update()">Update</button>
+      <form [formGroup]="formUpdate" (ngSubmit)="Update()">
+        <div class="form-group">
+          <label for="firstname">First Name</label>
+          <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="First Name">
+          <div *ngIf="firstname.invalid && firstname.touched" class="invalid-feedback">
+            Please provide a valid first name.
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="p-3 py-5">
-          <div class="d-flex justify-content-between align-items-center experience">
-            <span>Profile Picture</span>
-            <input type="file" #imageInput class="file-upload" accept="image/*" (change)="onPictureChanged(imageInput)" onchange="console.log(event.target.files)">
-          </div><br>
+        <div class="form-group">
+          <label for="lastname">Last Name</label>
+          <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Last Name">
+          <div *ngIf="lastname.invalid && lastname.touched" class="invalid-feedback">
+            Please provide a valid last name.
+          </div>
         </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" formControlName="username" placeholder="Username">
+          <div *ngIf="username.invalid && username.touched" class="invalid-feedback">
+            Please provide a valid username.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email">
+          <div *ngIf="email.invalid && email.touched" class="invalid-feedback">
+            <span *ngIf="email.hasError('required')">Please provide an email.</span>
+            <span *ngIf="email.hasError('email')">Please provide a valid email.</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" formControlName="address" placeholder="Address">
+          <div *ngIf="address.invalid && address.touched" class="invalid-feedback">
+            Please provide a valid address.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="birthday">Birthday</label>
+          <input type="date" class="form-control" id="birthday" formControlName="birthday" min="1900-01-01" max="2023-01-01">
+        </div>
+        <div class="form-group">
+          <label for="oldpassword">Old Password</label>
+          <input type="password" class="form-control" id="oldpassword" formControlName="oldpassword" placeholder="Old Password">
+          <div *ngIf="oldpassword.invalid && oldpassword.touched" class="invalid-feedback">
+            <span *ngIf="oldpassword.hasError('minlength')">Password should be at least 8 characters long.</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="newpassword">New Password</label>
+          <input type="password" class="form-control" id="newpassword" formControlName="newpassword" placeholder="New Password">
+        </div>
+        <div class="text-center">
+          <button class="btn btn-primary profile-button" type="submit">Update</button>
+        </div>
+      </form>
+    </div>
+    <div class="card-footer">
+      <div class="profile-picture">
+        <label for="profile-picture">Profile Picture</label>
+        <input type="file" id="profile-picture" #imageInput accept="image/*" (change)="onPictureChanged(imageInput)">
       </div>
     </div>
   </div>

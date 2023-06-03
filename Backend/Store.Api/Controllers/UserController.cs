@@ -34,9 +34,22 @@ namespace Store.Api.Controllers
             return Ok(response);
         }
 
+        //[HttpPost("register")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Register(RegisterUserRequest newUser)
+        //{
+        //    if (newUser.Birthday.Date > DateTime.Now.Date)
+        //        return BadRequest("Date is older than current date");
+
+        //    var register = _mapper.Map<RegisterUserDTO>(newUser);
+        //    if (!await _userService.Register(register))
+        //        return BadRequest("Invalid input");
+        //    return Ok();
+        //}
+
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterUserRequest newUser)
+        public async Task<IActionResult> Register([FromForm] RegisterUserRequest newUser)
         {
             if (newUser.Birthday.Date > DateTime.Now.Date)
                 return BadRequest("Date is older than current date");

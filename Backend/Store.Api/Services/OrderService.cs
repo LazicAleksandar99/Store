@@ -44,7 +44,7 @@ namespace Store.Api.Services
             }
             else if(await _uow.UserRepository.Check(u => u.Id == id && u.Role == "Salesman"))
             {
-                var result = await _uow.OrderRepository.Find(o => o.UserId == id && o.Status == "Delivering");
+                var result = await _uow.OrderRepository.Find(o => o.SalesmanId == id && o.Status == "Delivering");
                 returnValue = _mapper.Map<List<GetActiveOrderDTO>>(result);
             }
             return returnValue;

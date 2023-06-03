@@ -13,6 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class RegistrationComponent implements OnInit {
   formRegisteration!: FormGroup ;
   newUser!: RegistrationInfo;
+  selectedProfilePicture!: File;
 
   constructor(private router: Router,
               private fb: FormBuilder,
@@ -26,15 +27,19 @@ export class RegistrationComponent implements OnInit {
   
   createRegisterationForm() {
     this.formRegisteration = this.fb.group({
-      username: ["badname",Validators.required],
+      username: ["badname123",Validators.required],
       firstName: ["Andrew",[Validators.required,Validators.minLength(3)]],
       lastName: ["Tate",[Validators.required,Validators.minLength(3)]],
-      email: ["tate@tate.com",[Validators.required,Validators.email]],
+      email: ["tat123e@tate.com",[Validators.required,Validators.email]],
       birthday: ["2003-05-05",[Validators.required]],
       address: ["Strazilovska",[Validators.required]],
       password: ["password", [Validators.required, Validators.minLength(8)]],
       confirmPassword: ["password", Validators.required],
     },{validators: this.doPasswordsMatchValidatior});
+  }
+
+  onPictureChanged(imageInput: any){
+    this.selectedProfilePicture = imageInput.files[0];
   }
 
   Register(role: string){
@@ -77,7 +82,8 @@ export class RegistrationComponent implements OnInit {
         birthday: this.formRegisteration.value['birthday'],
         address: this.address.value,
         role: userRole,
-        password: this.password.value
+        password: this.password.value,
+        picture: this.selectedProfilePicture
     };
   }
 

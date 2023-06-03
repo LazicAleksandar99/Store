@@ -1,4 +1,4 @@
-import { ActiveItem, HistoryItem } from "./item";
+import { ActiveItem, HistoryItem, MakeItem } from "./item";
 
 export interface Order {
     id: number,
@@ -30,4 +30,17 @@ export interface ActiveOrders {
     delivery: Date,
     price: number,
     status: string
+}
+
+export interface MakeOrder{
+    comment: string,
+    address: string,
+    userId: number,
+    salesmanId: number,
+    item: MakeItem,
+}
+
+export interface CancelOrder{
+    userId: number,
+    orderId: number,
 }

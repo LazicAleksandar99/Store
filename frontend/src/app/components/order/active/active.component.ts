@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ActiveOrders } from 'src/app/models/order';
+import { ActiveOrders, CancelOrder } from 'src/app/models/order';
+import { TokenAuthorization } from 'src/app/models/token';
 import { OrderService } from 'src/app/services/order.service';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -11,12 +12,17 @@ import { TokenService } from 'src/app/services/token.service';
 })
 export class ActiveComponent implements OnInit {
   active!: ActiveOrders[]
+  userRole!: string;
 
   constructor(private orderService: OrderService,
               private toastr: ToastrService,
-              private tokenService: TokenService) { }
+              private tokenService: TokenService) {
+    
+    this.userRole = (this.tokenService.getTokenInformation(localStorage.getItem('token') as string) as TokenAuthorization).role;
+  }
 
   ngOnInit() {
+    this.getActive();
   }
 
   getActive(): void{
@@ -28,6 +34,27 @@ export class ActiveComponent implements OnInit {
           timeOut: 3000,
           closeButton: true,
         });
+      }
+    );
+  }
+
+  Cancel(id: number){
+    const ordercancelation: CancelOrder = {
+      userId: this.tokenService.getUserId(localStorage.getItem('token') as string),
+      orderId: id 
+    }
+    this.orderService.cancel(ordercancelation).subscribe(
+      data=> {
+        this.toastr.success("Order canceled", 'Success!' , {
+          timeOut: 3000,
+          closeButton: true,
+        });
+      }, 
+      error =>{
+        this.toastr.error("Cancelation failed", 'Error!' , {
+          timeOut: 3000,
+          closeButton: true,
+        });  
       }
     );
   }

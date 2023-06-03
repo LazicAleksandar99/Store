@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,10 @@ import { ProfileCardComponent } from './components/user/profile-card/profile-car
 import { ProfileComponent } from './pages/profile/profile.component';
 import { DashboardTemplateComponent } from './pages/dashboard-template/dashboard-template.component';
 import { SalesmanComponent } from './components/user/salesman/salesman.component';
+import { AllArticleComponent } from './components/article/all-article/all-article.component';
+import { EditArticleComponent } from './pages/edit-article/edit-article.component';
+import { SalesmanArticlesComponent } from './components/article/salesman-articles/salesman-articles.component';
+import { AddArticleComponent } from './components/article/add-article/add-article.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +40,11 @@ import { SalesmanComponent } from './components/user/salesman/salesman.component
     ProfileCardComponent,
     ProfileComponent,
     DashboardTemplateComponent,
-    SalesmanComponent
+    SalesmanComponent,
+    AllArticleComponent,
+    EditArticleComponent,
+    SalesmanArticlesComponent,
+    AddArticleComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +55,7 @@ import { SalesmanComponent } from './components/user/salesman/salesman.component
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxPaginationModule,
     ToastrModule.forRoot(),
   ],
   providers: [],

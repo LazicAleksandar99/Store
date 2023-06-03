@@ -1,3 +1,49 @@
-<p>
-  salesman-articles works!
-</p>
+<div class="container text-center" [style.paddingTop]="'4%'" [style.paddingBottom]="'2%'">
+  <div class="row" [style.paddingTop]="'1rem'">
+    <!-- <div class="col-3" [style.backgroundColor]="'white'" [style.height]="'800px'" [style.paddingTop]="'2%'">
+      <div class='home_panelList-wrap'>
+        <div class='home_panel-wrap'>
+          <app-filter-panel
+            [value]="searchInput"
+            (changeInput)="setSearchInput($event.target.value)"
+            [selectedPrice]="selectedPrice"
+            (changePrice)="handleChangePrice($event)"
+          ></app-filter-panel>
+        </div>
+      </div>
+    </div> -->
+    <div class="col-9">
+      <div class='product_list'>
+        <div *ngFor="let article of salesmanArticles | paginate: {itemsPerPage: 6, currentPage: page}">
+          <div>
+            <div class='card'>
+              <div class='card_image'>
+                <img [src]="article.picture" [alt]="'InvalidUrl'" />
+              </div>
+              <div class='card_info'>
+                <h2> {{article.name}} </h2>
+                <h5> {{article.price}} $ </h5>
+                <h3> {{article.description}} </h3>
+                <h5> Quantity: {{article.quantity}}</h5>
+                <button class="btn btn-success primar" (click)="Edit(article.id)">Edit</button>
+                <button class="btn btn-danger danger" (click)="Delete(article.id)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <pagination-controls (pageChange)="page = $event" style="margin-left: 260px;"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 
+export interface Article{
+  id : number;
+  name: string;
+  price: number;
+  quantity: number;
+  description: string;
+  picture: string;
+  userId: number;
+} -->

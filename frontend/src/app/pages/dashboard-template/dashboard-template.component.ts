@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { TokenAuthorization } from 'src/app/models/token';
 import { TokenService } from 'src/app/services/token.service';
 
@@ -10,11 +10,17 @@ import { TokenService } from 'src/app/services/token.service';
 export class DashboardTemplateComponent implements OnInit {
   userRole!: string;
   
-  constructor(private tokenService: TokenService) {
+  constructor(private tokenService: TokenService,
+              private el: ElementRef) {
 
     this.userRole = (this.tokenService.getTokenInformation(localStorage.getItem('token') as string) as TokenAuthorization).role;
    }
 
   ngOnInit() {
+  }
+
+  scrollToSection(id: string): void {
+    const element = this.el.nativeElement.querySelector(`#${id}`);
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
