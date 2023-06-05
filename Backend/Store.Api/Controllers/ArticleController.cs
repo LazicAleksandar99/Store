@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Request.ArticleRequest;
+using Store.Api.Response.ArticleResponse;
+using Store.Api.Response.OrderResponse;
+using Store.Api.Response.UserResponse;
 using Store.Core.Common.Interfaces.Services;
 using Store.Core.DTOs.ArticleDTOs;
 
@@ -38,7 +41,8 @@ namespace Store.Api.Controllers
             var result = await _articleService.GetArticle(id);
             if (result == null)
                 return BadRequest("Article does not exist");
-            return Ok(result);
+            var article = _mapper.Map<GetArticleResponse>(result);
+            return Ok(article);
         }
 
         [HttpPatch("update")]
@@ -56,7 +60,10 @@ namespace Store.Api.Controllers
         public async Task<IActionResult> GetAllArticles()
         {
             var result = await _articleService.GetAllArticles();
-            return Ok(result);
+            if (result != null && result.Count == 0)
+                return Ok(new List<GetAllArticlesResponse>());
+            var articles = _mapper.Map<List<GetAllArticlesResponse>>(result);
+            return Ok(articles);
         }
 
         [HttpGet("salesman/{id}")]
@@ -66,7 +73,10 @@ namespace Store.Api.Controllers
             var result = await _articleService.GetSalesmanArticles(id);
             if (result == null)
                 return BadRequest("Not salesman exist with this id");
-            return Ok(result);
+            if (result != null && result.Count == 0)
+                return Ok(new List<GetSalesmanArticlesResponse>());
+            var articles = _mapper.Map<List<GetSalesmanArticlesResponse>>(result);
+            return Ok(articles);
         }
 
         [HttpDelete("delete/{articleId}/{salesmanId}")]

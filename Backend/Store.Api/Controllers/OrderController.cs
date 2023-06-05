@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Request.OrderRequest;
+using Store.Api.Response.OrderResponse;
 using Store.Core.Common.Interfaces.Services;
 using Store.Core.DTOs.ArticleDTOs;
 using Store.Core.DTOs.OrderDTOs;
+using System.Threading.Channels;
 
 namespace Store.Api.Controllers
 {
@@ -36,7 +38,10 @@ namespace Store.Api.Controllers
         public async Task<IActionResult> AllOrder()
         {
             var result = await _orderService.AllOrders();
-            return Ok(result);
+            if(result != null && result.Count == 0)
+                return Ok(new List<GetAllOrderResponse>());
+            var orders = _mapper.Map<List<GetAllOrderResponse>>(result);
+            return Ok(orders);
         }
 
         [HttpGet("active/{id}")]
@@ -46,7 +51,10 @@ namespace Store.Api.Controllers
             var result = await _orderService.GetActiveOrders(id);
             if (result == null)
                 return BadRequest("Bad ID");
-            return Ok(result);
+            if (result != null && result.Count == 0)
+                return Ok(new List<GetActiveOrderResponse>());
+            var orders = _mapper.Map<List<GetActiveOrderResponse>>(result);
+            return Ok(orders);
         }
 
 
@@ -57,7 +65,10 @@ namespace Store.Api.Controllers
             var result = await _orderService.History(id);
             if (result == null)
                 return BadRequest("Bad ID");
-            return Ok(result);
+            if (result != null && result.Count == 0)
+                return Ok(new List<GetOrderHistoryResponse>());
+            var orders = _mapper.Map<List<GetOrderHistoryResponse>>(result);
+            return Ok(orders);
         }
 
         [HttpPatch("cancel")]   

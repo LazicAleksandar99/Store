@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CountdownComponent, CountdownConfig, CountdownEvent } from 'ngx-countdown';
 import { ToastrService } from 'ngx-toastr';
 import { ActiveOrders, CancelOrder } from 'src/app/models/order';
 import { TokenAuthorization } from 'src/app/models/token';
@@ -13,6 +14,7 @@ import { TokenService } from 'src/app/services/token.service';
 export class ActiveComponent implements OnInit {
   active!: ActiveOrders[]
   userRole!: string;
+  countdownConfig!: CountdownConfig;
 
   constructor(private orderService: OrderService,
               private toastr: ToastrService,
@@ -29,6 +31,18 @@ export class ActiveComponent implements OnInit {
     this.orderService.getActive(this.tokenService.getUserId(localStorage.getItem('token') as string)).subscribe(
       data=>{
         this.active = data as ActiveOrders[];
+        for(let key in this.active){
+          let activeOrder = this.active[key];
+          const currentTime = new Date().getTime();
+          const endDeliveryTime = new Date(activeOrder.delivery).getTime();
+          const time = endDeliveryTime - currentTime;
+            this.countdownConfig = {
+              leftTime: time / 1000,
+              notify: 0,
+              format: 'HH:mm:ss'
+            };
+            activeOrder.configCountDown = this.countdownConfig;
+        }
       }, error =>{
         this.toastr.error("Failed to get all active orders", 'Error!' , {
           timeOut: 3000,

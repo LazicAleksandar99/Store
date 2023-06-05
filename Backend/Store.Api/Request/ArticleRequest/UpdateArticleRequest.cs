@@ -24,6 +24,6 @@ namespace Store.Api.Request.ArticleRequest
         public string Picture { get; set; }
         [Required]
         public int SalesmanId { get; set; }
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
     }
 }

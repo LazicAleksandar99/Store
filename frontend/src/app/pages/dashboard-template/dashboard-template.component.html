@@ -88,7 +88,7 @@
                 </div>
               </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item"  *ngIf="userRole =='Salesman' || userRole =='Customer'">
               <a class="nav-link pointer" (click)="scrollToSection('reminder')">
                 <span data-feather="shopping-cart"></span>
                 Order history
@@ -159,7 +159,7 @@
           </div>
           <br/>
   
-          <div class="card">
+          <div class="card"  *ngIf="userRole =='Salesman' || userRole =='Customer'">
             <div class="card-header">
               <h2 style="color:black">Order history</h2>
             </div>

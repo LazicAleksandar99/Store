@@ -43,3 +43,11 @@
 .card_info h3 {
     color: #272727;
 }
+
+
+.invalid-feedback {
+    color: #dc3545;
+    display: block;
+    font-size: 14px;
+    margin-top: 5px;
+  }

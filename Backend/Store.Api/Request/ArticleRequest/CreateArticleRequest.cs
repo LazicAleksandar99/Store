@@ -8,7 +8,7 @@ namespace Store.Api.Request.ArticleRequest
         [StringLength(100)]
         public string Name { get; set; }
         [Required]
-        [Range(0, float.MaxValue)]
+        [Range(1, float.MaxValue)]
         public float Price { get; set; }
         [Required]
         [Range(1, int.MaxValue)]

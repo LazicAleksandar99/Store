@@ -16,3 +16,12 @@
     position: absolute;
     left: -9999px;
 }
+
+
+  
+.invalid-feedback {
+    color: #dc3545;
+    display: block;
+    font-size: 14px;
+    margin-top: 5px;
+  }

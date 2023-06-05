@@ -1,3 +1,4 @@
+import { CountdownConfig } from "ngx-countdown";
 import { ActiveItem, HistoryItem, MakeItem } from "./item";
 
 export interface Order {
@@ -30,6 +31,7 @@ export interface ActiveOrders {
     delivery: Date,
     price: number,
     status: string
+    configCountDown: CountdownConfig,
 }
 
 export interface MakeOrder{

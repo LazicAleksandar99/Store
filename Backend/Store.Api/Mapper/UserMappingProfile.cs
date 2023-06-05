@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Store.Api.Request.UserRequest;
+using Store.Api.Response.UserResponse;
 using Store.Core.DTOs.UserDTOs;
 using Store.Core.Models;
 
@@ -22,6 +23,8 @@ namespace Store.Api.Mapper
                 .ForMember(dest => dest.PasswordKey, opt => opt.Ignore());
             CreateMap<User, GetSalesmansDTO>();
             CreateMap<User, GetUserDTO>();
+            CreateMap<GetUserDTO, GetUserResponse>();
+            CreateMap<GetSalesmansDTO, GetSalesmansResponse>();
         }
     }
 }

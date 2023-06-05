@@ -30,11 +30,11 @@
                     <input class="form-control"  formControlName="quantity" id="numberId" type="number" min="1" max="10000"  style="text-align:center ;">
                   </div>
                   <input type="text" class="form-control" formControlName="address" placeholder="address" >
-                  <span *ngIf="!address.valid && (address.touched)"class="alert alert-danger">
+                  <span *ngIf="!address.valid && (address.touched)"class="invalid-feedback">
                       Please provide address
                   </span>
                   <input type="text" class="form-control" formControlName="comment" placeholder="comment" >
-                  <span *ngIf="!comment.valid && (comment.touched)"class="alert alert-danger">
+                  <span *ngIf="!comment.valid && (comment.touched)"class="invalid-feedback">
                       Please provide comment
                   </span>                
                 </form>     

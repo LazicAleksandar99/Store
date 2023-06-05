@@ -6,6 +6,7 @@
         <th >Address</th>
         <th >Comment</th>
         <th >Status</th>
+        <th *ngIf="userRole == 'Customer' || userRole == 'Salesman'" >Time unitl delivery</th>
         <th >Article Name</th>
         <th >Article Price</th>
         <th >Quantity</th>
@@ -22,6 +23,9 @@
             <td>{{order.address}}</td>
             <td>{{order.comment}}</td>
             <td>{{order.status}}</td>
+            <td *ngIf="userRole == 'Customer' || userRole == 'Salesman'">
+              <countdown [config]="order.configCountDown"></countdown>
+            </td>
             <td>{{order.item.articleName}}</td>
             <td>{{order.item.quantity !== 0 ? (order.price - 20) / order.item.quantity : 'N/A'}}</td>
             <td>{{order.item.quantity}}</td>

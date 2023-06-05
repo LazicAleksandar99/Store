@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Request.UserRequest;
+using Store.Api.Response.OrderResponse;
+using Store.Api.Response.UserResponse;
 using Store.Core.Common.Interfaces.Services;
 using Store.Core.DTOs.OrderDTOs;
 using Store.Core.DTOs.UserDTOs;
@@ -34,19 +36,6 @@ namespace Store.Api.Controllers
             return Ok(response);
         }
 
-        //[HttpPost("register")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Register(RegisterUserRequest newUser)
-        //{
-        //    if (newUser.Birthday.Date > DateTime.Now.Date)
-        //        return BadRequest("Date is older than current date");
-
-        //    var register = _mapper.Map<RegisterUserDTO>(newUser);
-        //    if (!await _userService.Register(register))
-        //        return BadRequest("Invalid input");
-        //    return Ok();
-        //}
-
         [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromForm] RegisterUserRequest newUser)
@@ -70,7 +59,8 @@ namespace Store.Api.Controllers
             var result = await _userService.GetUserDetails(id);
             if (result == null)
                 return BadRequest("User not found");
-            return Ok(result);
+            var user = _mapper.Map<GetUserResponse>(result);
+            return Ok(user);
         }
 
         [HttpPatch("update")]
@@ -102,7 +92,11 @@ namespace Store.Api.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> GetSellers()
         {
-            return Ok(await _userService.GetSalesman());
+            var result = await _userService.GetSalesman();
+            if (result != null && result.Count == 0)
+                return Ok(new List<GetSalesmansResponse>());
+            var salesman = _mapper.Map<List<GetSalesmansResponse>>(result);
+            return Ok(salesman);
         }
     }
 }

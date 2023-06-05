@@ -73,7 +73,7 @@ export class EditArticleComponent implements OnInit {
         description: this.description.value,
         price: this.price.value,
         quantity: this.quantity.value,
-        picture: "url",
+        picture: this.article.picture,
         salesmanId: this.tokenService.getUserId(localStorage.getItem('token') as string),
         file: this.selectedArticlePicture
     };
@@ -120,5 +120,4 @@ export class EditArticleComponent implements OnInit {
   get description() {
     return this.updateArticleForm.get('description') as FormControl;
   }
-
 }

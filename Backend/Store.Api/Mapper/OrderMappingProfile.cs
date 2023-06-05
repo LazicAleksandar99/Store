@@ -27,19 +27,22 @@ namespace Store.Api.Mapper
             CreateMap<Order, GetOrderHistoryDTO>()
                 .ForMember(dest => dest.Item, opt => opt.MapFrom(src => src.Item));
             CreateMap<Item, GetOrderItemHistoryDTO>();
-            CreateMap<GetOrderHistoryDTO, GetOrderHistoryResponse>();
+            CreateMap<GetOrderHistoryDTO, GetOrderHistoryResponse>()
+                .ForMember(dest => dest.Item, opt => opt.MapFrom(src => src.Item));
             CreateMap<GetOrderItemHistoryDTO, GetOrderItemHistoryResponse>();
             //get all orders
             CreateMap<Order, GetAllOrderDTO>()
                 .ForMember(dest => dest.Item, opt => opt.MapFrom(src => src.Item));
             CreateMap<Item, GetAllOrderItemDTO>();
-            CreateMap<GetAllOrderDTO, GetAllOrderResponse>();
+            CreateMap<GetAllOrderDTO, GetAllOrderResponse>()
+                .ForMember(dest => dest.Item, opt => opt.MapFrom(src => src.Item));
             CreateMap<GetAllOrderItemDTO, GetAllOrderItemResponse>();
             //get active orders
             CreateMap<Order, GetActiveOrderDTO>()
                 .ForMember(dest => dest.Item, opt => opt.MapFrom(src => src.Item));
             CreateMap<Item, GetActiveOrderItemDTO>();
-            CreateMap<GetActiveOrderDTO, GetActiveOrderResponse>();
+            CreateMap<GetActiveOrderDTO, GetActiveOrderResponse>()
+                .ForMember(dest => dest.Item, opt => opt.MapFrom(src => src.Item));
             CreateMap<GetActiveOrderItemDTO, GetActiveOrderItemResponse>();
         }
 

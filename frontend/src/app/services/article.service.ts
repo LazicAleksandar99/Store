@@ -35,7 +35,7 @@ export class ArticleService {
     formData.append('price' , updatedArticle.price.toString());
     formData.append('quantity',updatedArticle.quantity.toString());
     formData.append('description',updatedArticle.description);
-    formData.append('picture','empty');
+    formData.append('picture',updatedArticle.picture);
     formData.append('salesmanId',updatedArticle.salesmanId.toString());
     formData.append('file',updatedArticle.file);
 
